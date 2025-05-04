@@ -3,7 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'; // Or FontAwesome, MaterialIcons, etc.
+import Icon from 'react-native-vector-icons/Ionicons';
+import Home from './SalonOwner/Home';
+import Profile from './SalonOwner/Profile';
 // Import screens
 // import Profile from './Profile';
 // import Form1 from './Form';
@@ -20,11 +22,10 @@ import Icon from 'react-native-vector-icons/Ionicons'; // Or FontAwesome, Materi
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-// 🔹 **1. Bottom Tab Navigator (Manages Home & Profile)**
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+    id={undefined}
     screenOptions={({ route }) => ({
       headerShown: false,
       tabBarShowLabel: true,
@@ -78,10 +79,10 @@ const TabNavigator = () => {
   );
 };
 
-// 🔹 **2. Stack Navigator (Includes Tabs + Salon Details)**
 const StackNavigator = () => {
   return (
     <Stack.Navigator
+    id={undefined}
       screenOptions={{
         // headerStyle: { backgroundColor: '#1F6357' },
         // headerTintColor: 'white',
@@ -100,9 +101,7 @@ const StackNavigator = () => {
         // headerBackTitleVisible: false, // iOS only
       }}
     >
-      {/* Show the Bottom Tab Navigator */}
       <Stack.Screen name="My Salons" component={TabNavigator} options={{ headerShown: false }} />
-      {/* Extra screen outside of tabs */}
       {/* <Stack.Screen name='HomeInside' component={Home}/>
       <Stack.Screen name='SalonInterface' component={SalonInterface} options={{ headerShown: false }}/>
       <Stack.Screen name='SaloInterfaceHome' component={SalonInterfaceHome} />
@@ -119,7 +118,6 @@ const StackNavigator = () => {
   );
 };
 
-// 🔹 **3. Home Screen (Floating Button for Salon Details)**
 // const HomeScreen = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
 //   return (
   
@@ -135,7 +133,6 @@ const StackNavigator = () => {
 //   );
 // };
 
-// 🔹 **4. Main App Navigation (Root)**
 const App = () => {
   return (
     // <><Home navigation={{
@@ -149,7 +146,6 @@ const App = () => {
   );
 };
 
-// 🔹 **5. Styles**
 const styles = StyleSheet.create({
   container: {
     flex: 1,
