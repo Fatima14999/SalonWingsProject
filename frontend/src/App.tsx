@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons'; // Or FontAwesome, MaterialIcons, etc.
+import Home from './SalonOwner/Home';
+import Profile from './SalonOwner/Profile';
 // Import screens
 // import Profile from './Profile';
 // import Form1 from './Form';
@@ -25,6 +27,7 @@ const Stack = createNativeStackNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+    id={undefined}
     screenOptions={({ route }) => ({
       headerShown: false,
       tabBarShowLabel: true,
@@ -82,6 +85,7 @@ const TabNavigator = () => {
 const StackNavigator = () => {
   return (
     <Stack.Navigator
+    id={undefined}
       screenOptions={{
         // headerStyle: { backgroundColor: '#1F6357' },
         // headerTintColor: 'white',
