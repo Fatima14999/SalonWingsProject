@@ -3,17 +3,18 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'; // Or FontAwesome, MaterialIcons, etc.
+import Icon from 'react-native-vector-icons/Ionicons'; 
 import Home from './SalonOwner/Home';
 import Profile from './SalonOwner/Profile';
 // Import screens
 // import Profile from './Profile';
-// import Form1 from './Form';
-// import Form2 from './Form2';
+import Form1 from './SalonOwner/Form';
+import Form2 from './SalonOwner/Form2';
 // import EditProfile from './EditProfile';
-// import Home from './Home';
-// import SalonInterface from './SalonInterface';
-// import SalonInterfaceHome from './SalonInterfaceHome';
+// import Home from './SalonOwner/Home';
+import SalonInterface from './SalonOwner/SalonInterface';
+import SalonInterfaceHome from './SalonOwner/SalonInterfaceHome';
+import { SafeAreaView } from 'react-native-safe-area-context';
 // import EditSalonDetails from './EditSalonDetails';
 // import changePassword from './CurrentPasswordScreen';
 // import CurrentPasswordScreen from './CurrentPasswordScreen';
@@ -22,13 +23,11 @@ import Profile from './SalonOwner/Profile';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-// 🔹 **1. Bottom Tab Navigator (Manages Home & Profile)**
 const TabNavigator = () => {
   return (
     <Tab.Navigator
     id={undefined}
-    screenOptions={({ route }) => ({
+    screenOptions={() => ({
       headerShown: false,
       tabBarShowLabel: true,
       tabBarLabelStyle: {
@@ -80,8 +79,6 @@ const TabNavigator = () => {
   </Tab.Navigator>
   );
 };
-
-// 🔹 **2. Stack Navigator (Includes Tabs + Salon Details)**
 const StackNavigator = () => {
   return (
     <Stack.Navigator
@@ -93,67 +90,42 @@ const StackNavigator = () => {
         // title: 'EditProfile',
         headerStyle: {
           backgroundColor: '#fff',
-          // shadowColor: '#000', // subtle shadow on iOS
-          // elevation: 1, // subtle shadow on Android
+          // shadowColor: '#000', 
+          // elevation: 1, 
         },
         headerTitleStyle: {
           fontWeight: '600',
           fontSize: 18,
         },
-        headerTintColor: '#000', // back button color
-        // headerBackTitleVisible: false, // iOS only
+        headerTintColor: '#000',
       }}
     >
-      {/* Show the Bottom Tab Navigator */}
       <Stack.Screen name="My Salons" component={TabNavigator} options={{ headerShown: false }} />
-      {/* Extra screen outside of tabs */}
-      {/* <Stack.Screen name='HomeInside' component={Home}/>
+      <Stack.Screen name='HomeInside' component={Home}/>
       <Stack.Screen name='SalonInterface' component={SalonInterface} options={{ headerShown: false }}/>
       <Stack.Screen name='SaloInterfaceHome' component={SalonInterfaceHome} />
-      <Stack.Screen name='EditSalonDetails' component={EditSalonDetails} />
-      <Stack.Screen name='SetNewPassword' component={SetNewPassword} options={{ title: 'ChangePassword', headerStyle:{backgroundColor:'#fff' }}}/>
-      <Stack.Screen name='ChangePassword' component={CurrentPasswordScreen} />
-      <Stack.Screen name="Salon Details" component={Form1} />
-      <Stack.Screen name="Identification Details" component={Form2} />
-      <Stack.Screen name='Notifications' component={Notifications}/>
+      {/* <Stack.Screen name='EditSalonDetails' component={EditSalonDetails} /> */}
+      {/* <Stack.Screen name='SetNewPassword' component={SetNewPassword} options={{ title: 'ChangePassword', headerStyle:{backgroundColor:'#fff' }}}/> */}
+      {/* <Stack.Screen name='ChangePassword' component={CurrentPasswordScreen} /> */}
+      {/* <Stack.Screen name="Salon Details" component={Form1} /> */}
+      {/* <Stack.Screen name="Identification Details" component={Form2} /> */}
+      {/* <Stack.Screen name='Notifications' component={Notifications}/> */}
       <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
-      <Stack.Screen name='EditProfile' component={EditProfile} /> */}
+      {/* <Stack.Screen name='EditProfile' component={EditProfile} /> */}
     </Stack.Navigator>
 
   );
 };
 
-// 🔹 **3. Home Screen (Floating Button for Salon Details)**
-// const HomeScreen = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
-//   return (
-  
-//     <><View>
-//       <TouchableOpacity>
-//         <Text>heloo</Text>
-//       </TouchableOpacity>
-//     </View><View style={styles.container}>
-//         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Home")}>
-//           <Text style={styles.buttonText}>+</Text>
-//         </TouchableOpacity>
-//       </View></>
-//   );
-// };
-
-// 🔹 **4. Main App Navigation (Root)**
 const App = () => {
   return (
-    // <><Home navigation={{
-    //   navigate: function (arg0: string): void {
-    //     throw new Error('Function not implemented.');
-    //   }
-    // }} />
+    // <SafeAreaView>
     <NavigationContainer>
       <StackNavigator />
     </NavigationContainer>
+    // </SafeAreaView>
   );
 };
-
-// 🔹 **5. Styles**
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -184,5 +156,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-

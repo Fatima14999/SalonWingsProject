@@ -53,6 +53,7 @@ const Home = (props: { navigation: { navigate: (arg0: string) => void; }; }) => 
   );
 
   return (
+    
     <View style={{ flex: 1, padding: 16 }}>
       <Text style={styles.heading}>My Salons</Text>
       <FlatList
