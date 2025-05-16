@@ -117,7 +117,7 @@ const SalonBookingRequest = () => {
           data={bookings}
           renderItem={renderBooking}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContainer}
+          contentContainerStyle={[styles.listContainer,{ paddingBottom: 100 }]}
           showsVerticalScrollIndicator={false}
         />
       )}

@@ -19,7 +19,7 @@ const Home = (props: { navigation: { navigate: (arg0: string) => void; }; }) => 
       name: "Brookes Beauty",
       location: "Reham colony",
       rating: 4.8,
-      logoUrl: "https://via.placeholder.com/150"
+      logoUrl: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=100&q=80"
     }
   ]);
 

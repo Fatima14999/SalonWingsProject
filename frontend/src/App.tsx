@@ -6,19 +6,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 import Home from './SalonOwner/Home';
 import Profile from './SalonOwner/Profile';
-// Import screens
-// import Profile from './Profile';
 import Form1 from './SalonOwner/Form';
 import Form2 from './SalonOwner/Form2';
-// import EditProfile from './EditProfile';
+import EditProfile from './SalonOwner/EditProfile';
 // import Home from './SalonOwner/Home';
+import SaloInterfaceHome from './SalonOwner/SalonInterfaceHome';
 import SalonInterface from './SalonOwner/SalonInterface';
-import SalonInterfaceHome from './SalonOwner/SalonInterfaceHome';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import ServiceForm from './SalonOwner/ServicesForm';
 // import EditSalonDetails from './EditSalonDetails';
-// import changePassword from './CurrentPasswordScreen';
+import changePassword from './SalonOwner/ChangePassword';
 // import CurrentPasswordScreen from './CurrentPasswordScreen';
-// import SetNewPassword from './SetNewPassword';
+import SetNewPassword from './SalonOwner/SetNewPassword';
+import ChangePassword from './SalonOwner/ChangePassword';
+import TabBarNavigation from './Admin/TabBarNavigation';
+import ViewSalonBoonkings from './Admin/ViewSalonBookings';
+import AddService from './SalonOwner/AddService';
 // import Notifications from './Notifications';
 
 const Tab = createBottomTabNavigator();
@@ -103,15 +105,19 @@ const StackNavigator = () => {
       <Stack.Screen name="My Salons" component={TabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name='HomeInside' component={Home}/>
       <Stack.Screen name='SalonInterface' component={SalonInterface} options={{ headerShown: false }}/>
-      <Stack.Screen name='SaloInterfaceHome' component={SalonInterfaceHome} />
+      <Stack.Screen name='SaloInterfaceHome' component={SaloInterfaceHome} />
       {/* <Stack.Screen name='EditSalonDetails' component={EditSalonDetails} /> */}
-      {/* <Stack.Screen name='SetNewPassword' component={SetNewPassword} options={{ title: 'ChangePassword', headerStyle:{backgroundColor:'#fff' }}}/> */}
-      {/* <Stack.Screen name='ChangePassword' component={CurrentPasswordScreen} /> */}
-      {/* <Stack.Screen name="Salon Details" component={Form1} /> */}
-      {/* <Stack.Screen name="Identification Details" component={Form2} /> */}
+      <Stack.Screen name='SetNewPassword' component={SetNewPassword} options={{ title: 'ChangePassword', headerStyle:{backgroundColor:'#fff' }}}/>
+      <Stack.Screen name='ServiceForm' component={ServiceForm}/>
+      <Stack.Screen name='ChangePassword' component={ChangePassword} />
+      <Stack.Screen name="Salon Details" component={Form1} />
+      <Stack.Screen name="Identification Details" component={Form2} />
       {/* <Stack.Screen name='Notifications' component={Notifications}/> */}
+      <Stack.Screen name='TabBarNavigation' component={TabBarNavigation}options={{headerShown:false}}/>
       <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
-      {/* <Stack.Screen name='EditProfile' component={EditProfile} /> */}
+      <Stack.Screen name='Bookings' component={ViewSalonBoonkings} />
+      <Stack.Screen name='EditProfile' component={EditProfile} />
+      <Stack.Screen name='AddService' component={AddService}/>
     </Stack.Navigator>
 
   );

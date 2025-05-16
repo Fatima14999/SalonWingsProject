@@ -32,6 +32,15 @@ const SalonBooking = () => {
       time: '2:30 PM',
       avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
     },
+    { 
+      id: '3', 
+      name: 'Ayesha Ahmed', 
+      services: ['Party Makeup'], 
+      contactNo: '0321 9876543', 
+      date: '27 April 2025',
+      time: '2:30 PM',
+      avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+    },
   ]);
 
   const cancelBooking = (id: string) => {
@@ -111,7 +120,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: { color: 'white', fontSize: 24, fontWeight: 'bold' },
 
-  listContent: { padding: 16 },
+  listContent: { padding: 16, paddingBottom:100 },
   card: {
     backgroundColor: 'white',
     borderRadius: 16,
