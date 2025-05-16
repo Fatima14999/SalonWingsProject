@@ -1,29 +1,75 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  PermissionsAndroid,
+  Platform,
+  Alert,
+} from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const Form2 = () => {
   const [cnicImages, setCnicImages] = useState<string[]>([]);
   const [salonImages, setSalonImages] = useState<string[]>([]);
-  const [gender, setGender] = useState<string>("");
+  const [selfieImage, setSelfieImage] = useState<string | null>(null);
+  const [gender, setGender] = useState<string>('');
+
+  const requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'App needs camera permission to take pictures.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          }
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const takeSelfie = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (!hasPermission) {
+      Alert.alert('Permission denied', 'Camera permission is required to take a selfie.');
+      return;
+    }
+
+    launchCamera({ mediaType: 'photo', cameraType: 'front' }, (response) => {
+      if (response.assets && response.assets.length > 0) {
+        setSelfieImage(response.assets[0].uri ?? null);
+      }
+    });
+  };
 
   const pickCnicImages = () => {
-    launchImageLibrary({ mediaType: "photo", selectionLimit: 5 }, (response) => {
+    launchImageLibrary({ mediaType: 'photo', selectionLimit: 5 }, (response) => {
       if (response.assets) {
         setCnicImages((prevImages) => [
           ...prevImages,
-          ...response.assets.map((img) => img.uri ?? ""),
+          ...response.assets.map((img) => img.uri ?? ''),
         ]);
       }
     });
   };
 
   const pickSalonImages = () => {
-    launchImageLibrary({ mediaType: "photo", selectionLimit: 5 }, (response) => {
+    launchImageLibrary({ mediaType: 'photo', selectionLimit: 5 }, (response) => {
       if (response.assets) {
         setSalonImages((prevImages) => [
           ...prevImages,
-          ...response.assets.map((img) => img.uri ?? ""),
+          ...response.assets.map((img) => img.uri ?? ''),
         ]);
       }
     });
@@ -38,8 +84,16 @@ const Form2 = () => {
 
   return (
     <View style={styles.container}>
-      
-      {/* CNIC Upload Box */}
+      {/* Selfie Section */}
+      <TouchableOpacity style={styles.uploadBox} onPress={takeSelfie}>
+        {selfieImage ? (
+          <Image source={{ uri: selfieImage }} style={styles.image} />
+        ) : (
+          <Text style={styles.uploadText}>Take Your Selfie</Text>
+        )}
+      </TouchableOpacity>
+
+      {/* CNIC Upload */}
       <TouchableOpacity style={styles.uploadBox} onPress={pickCnicImages}>
         {cnicImages.length > 0 ? (
           <View style={styles.imageWrapper}>
@@ -57,7 +111,7 @@ const Form2 = () => {
         )}
       </TouchableOpacity>
 
-      {/* Salon Upload Box */}
+      {/* Salon Upload */}
       <TouchableOpacity style={styles.uploadBox1} onPress={pickSalonImages}>
         {salonImages.length > 0 ? (
           <View style={styles.imageWrapper}>
@@ -75,7 +129,7 @@ const Form2 = () => {
         )}
       </TouchableOpacity>
 
-      {/* Gender Specific Section */}
+      {/* Gender Selection */}
       <View style={styles.genderSection}>
         <Text style={styles.genderTitle}>Gender Specific</Text>
         {["Male", "Female", "Both"].map((option) => (
@@ -88,7 +142,7 @@ const Form2 = () => {
         ))}
       </View>
 
-      {/* JazzCash Button */}
+      {/* Payment Detail Button */}
       <TouchableOpacity style={styles.paymentBox}>
         <Image
           source={{ uri: 'https://seeklogo.com/images/J/jazz-cash-logo-55FAAA2551-seeklogo.com.png' }}
@@ -122,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F8F8F8",
     overflow: "hidden",
-    position: "relative",
+    marginBottom: 10,
   },
   uploadBox1: {
     width: 320,
@@ -133,10 +187,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F8F8F8",
-    marginVertical: 10,
     marginBottom: 40,
     overflow: "hidden",
-    position: "relative",
   },
   uploadText: {
     fontSize: 16,

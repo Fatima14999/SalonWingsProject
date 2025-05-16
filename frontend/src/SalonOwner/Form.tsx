@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import PhoneInput from 'react-native-phone-number-input';
+import PhoneInput from '@linhnguyen96114/react-native-phone-input';
 import { MaskedTextInput } from 'react-native-mask-text';
 
-const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
-  const [salonName, setSalonName] = useState("");
-  const [salonOwnerName, setSalonOwnerName] = useState("");
-  const [contactNo, setContactNo] = useState("");
-  const [cnic, setCnic] = useState("");
+const Form1 = (props: { navigation: { navigate: (arg0: string) => void } }) => {
+  const [salonName, setSalonName] = useState('');
+  const [salonOwnerName, setSalonOwnerName] = useState('');
+  const [contactNo, setContactNo] = useState('');
+  const [cnic, setCnic] = useState('');
 
   const [errors, setErrors] = useState({
     salonOwnerName: '',
     salonName: '',
     contactNo: '',
-    cnic: ''
+    cnic: '',
   });
 
   const handleNext = () => {
@@ -49,14 +49,19 @@ const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) =>
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
           {/* Salon Owner Name */}
           <TextInput
             style={styles.textInput}
-            placeholder='Salon Owner Name'
+            placeholder="Salon Owner Name"
             placeholderTextColor="#888"
-            onChangeText={(text) => { setSalonOwnerName(text); setErrors({ ...errors, salonOwnerName: '' }); }}
+            onChangeText={(text) => {
+              setSalonOwnerName(text);
+              setErrors({ ...errors, salonOwnerName: '' });
+            }}
             value={salonOwnerName}
           />
           {errors.salonOwnerName ? <Text style={styles.errorText}>{errors.salonOwnerName}</Text> : null}
@@ -64,9 +69,12 @@ const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) =>
           {/* Salon Name */}
           <TextInput
             style={styles.textInput}
-            placeholder='Salon Name'
+            placeholder="Salon Name"
             placeholderTextColor="#888"
-            onChangeText={(text) => { setSalonName(text); setErrors({ ...errors, salonName: '' }); }}
+            onChangeText={(text) => {
+              setSalonName(text);
+              setErrors({ ...errors, salonName: '' });
+            }}
             value={salonName}
           />
           {errors.salonName ? <Text style={styles.errorText}>{errors.salonName}</Text> : null}
@@ -75,11 +83,17 @@ const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) =>
           <PhoneInput
             defaultValue={contactNo}
             defaultCode="PK"
-            onChangeFormattedText={(text) => { setContactNo(text); setErrors({ ...errors, contactNo: '' }); }}
+            layout="first"
+            onChangeFormattedText={(text) => {
+              setContactNo(text);
+              setErrors({ ...errors, contactNo: '' });
+            }}
             containerStyle={styles.phoneContainer}
             textContainerStyle={styles.phoneTextContainer}
             textInputStyle={{ color: 'black' }}
             codeTextStyle={{ color: 'black' }}
+            withDarkTheme={false}
+            withShadow={false}
           />
           {errors.contactNo ? <Text style={styles.errorText}>{errors.contactNo}</Text> : null}
 
@@ -90,7 +104,10 @@ const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) =>
             placeholder="CNIC Number"
             placeholderTextColor="#888"
             keyboardType="numeric"
-            onChangeText={(text, rawText) => { setCnic(rawText); setErrors({ ...errors, cnic: '' }); }}
+            onChangeText={(text, rawText) => {
+              setCnic(rawText);
+              setErrors({ ...errors, cnic: '' });
+            }}
             value={cnic}
           />
           {errors.cnic ? <Text style={styles.errorText}>{errors.cnic}</Text> : null}
@@ -106,7 +123,6 @@ const Form1 = (props: { navigation: { navigate: (arg0: string) => void; }; }) =>
           <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
             <Text style={styles.nextButtonText}>Next</Text>
           </TouchableOpacity>
-
         </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>
@@ -142,7 +158,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 8,
     color: '#374151',
     marginTop: 10,

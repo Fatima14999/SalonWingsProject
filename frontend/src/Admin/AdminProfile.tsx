@@ -8,12 +8,8 @@ import {
   Image,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import TabBarNavigation from '../Admin/TabBarNavigation';
-// import LinearGradient from 'react-native-linear-gradient';
-
-const Profile = (props: { navigation: any; route?: any }) => {
+const AdminProfile = (props: { navigation: any; route?: any }) => {
   const { navigation, route } = props;
-
   const [user, setUser] = useState('Hareem Fatima');
   const [image, setImage] = useState<string | null>(null);
 
@@ -28,12 +24,6 @@ const Profile = (props: { navigation: any; route?: any }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Gradient Header */}
-      {/* <LinearGradient
-        colors={['#1F6357', '#2C8C7C']}
-        style={styles.headerBackground}
-      /> */}
-
       <View style={styles.profileSection}>
         <View style={styles.imageContainer}>
           {image ? (
@@ -43,7 +33,6 @@ const Profile = (props: { navigation: any; route?: any }) => {
               <Text style={styles.avatarLetter}>{user.charAt(0).toUpperCase()}</Text>
             </View>
           )}
-
           <TouchableOpacity
             style={styles.editIcon}
             onPress={() =>
@@ -55,12 +44,9 @@ const Profile = (props: { navigation: any; route?: any }) => {
             <Feather name="edit-3" size={16} color="white" />
           </TouchableOpacity>
         </View>
-
         <Text style={styles.userName}>{user}</Text>
         <Text style={styles.userEmail}>fatimaghulammustafa@gmail.com</Text>
       </View>
-
-      {/* List Items */}
       <View style={styles.listContainer}>
         <TouchableOpacity style={styles.listItem}
         onPress={()=> props.navigation.navigate('ChangePassword')}>
@@ -80,7 +66,7 @@ const Profile = (props: { navigation: any; route?: any }) => {
           <Feather name="chevron-right" size={20} color="#ccc" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.listItem} onPress={()=> props.navigation.navigate('TabBarNavigation')}>
+        <TouchableOpacity style={styles.listItem}>
           <View style={styles.iconCircle}>
             <Feather name="log-out" size={20} color="white" />
           </View>
@@ -155,7 +141,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     color: '#1F1F1F',
-    // marginTop: 0,
   },
   userEmail: {
     fontSize: 14,
@@ -187,4 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default AdminProfile;
