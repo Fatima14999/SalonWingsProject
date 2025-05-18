@@ -64,8 +64,12 @@ const Profile = (props: { navigation: any; route?: any }) => {
       <View style={styles.listContainer}>
         <TouchableOpacity style={styles.listItem}
         onPress={()=> props.navigation.navigate('ChangePassword')}>
-          <View style={styles.iconCircle}>
-            <Feather name="lock" size={20} color="white" />
+          <View 
+          // style={styles.iconCircle}
+          >
+            <Feather name="lock" size={20}
+            //  color="white"
+              />
           </View>
           <Text style={styles.listText}>Change Password</Text>
           <Feather name="chevron-right" size={20} color="#ccc" />

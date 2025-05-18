@@ -57,7 +57,7 @@ const AdminProfile = (props: { navigation: any; route?: any }) => {
           <Feather name="chevron-right" size={20} color="#ccc" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.listItem}  onPress={()=> props.navigation.navigate('Notifications')}>
+        <TouchableOpacity style={styles.listItem}  onPress={()=> props.navigation.navigate('TabNavigationCustomer')}>
          
           <View style={styles.iconCircle}>
             <Feather name="bell" size={20} color="white" />

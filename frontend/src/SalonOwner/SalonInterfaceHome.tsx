@@ -30,7 +30,7 @@ const SingleSalon = ({ navigation }: any) => {
   };
 
   const handleServicePress = (service: any) => {
-    navigation.navigate('ServiceDetailsPage', { service }); // placeholder
+    navigation.navigate('ServiceDetails', { service }); // placeholder
   };
 
   const renderService = ({ item }: { item: any }) => (

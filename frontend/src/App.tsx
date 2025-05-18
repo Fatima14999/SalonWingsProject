@@ -21,6 +21,9 @@ import ChangePassword from './SalonOwner/ChangePassword';
 import TabBarNavigation from './Admin/TabBarNavigation';
 import ViewSalonBoonkings from './Admin/ViewSalonBookings';
 import AddService from './SalonOwner/AddService';
+import ServiceDetails from './SalonOwner/ServiceDetails';
+import HomeCustomer from './Customer/HomeCustomer';
+import TabNavigationCustomer from './Customer/TabNavigationCustomer'
 // import Notifications from './Notifications';
 
 const Tab = createBottomTabNavigator();
@@ -118,6 +121,9 @@ const StackNavigator = () => {
       <Stack.Screen name='Bookings' component={ViewSalonBoonkings} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='AddService' component={AddService}/>
+      <Stack.Screen name='ServiceDetails' component={ServiceDetails} options={{headerShown:false}}/>
+      <Stack.Screen name='HomeCustomer' component={HomeCustomer}/>
+      <Stack.Screen name='TabNavigationCustomer' component={TabNavigationCustomer} options={{headerShown:false}} />
     </Stack.Navigator>
 
   );

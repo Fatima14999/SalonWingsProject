@@ -9,7 +9,7 @@ type Salon = {
     name: string;
     location: string;
     rating: number;
-    logoUrl: string;
+    logourl: string;
   };
 
 const Home = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
@@ -19,7 +19,7 @@ const Home = (props: { navigation: { navigate: (arg0: string) => void; }; }) => 
       name: "Brookes Beauty",
       location: "Reham colony",
       rating: 4.8,
-      logoUrl: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=100&q=80"
+      logourl: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=100&q=80"
     }
   ]);
 
@@ -39,7 +39,7 @@ const Home = (props: { navigation: { navigate: (arg0: string) => void; }; }) => 
   const renderSalon = ({ item }: { item: Salon }) => (
     <TouchableOpacity onPress={() => props.navigation.navigate('SalonInterface' )}>
       <View style={styles.card}>
-        <Image source={{ uri: item.logoUrl }} style={styles.image} />
+        <Image source={{ uri: item.logourl }} style={styles.image} />
         <View style={styles.info}>
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.rating}>⭐ {item.rating}</Text>
