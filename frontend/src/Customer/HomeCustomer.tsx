@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import { View,Text,FlatList, TouchableOpacity,StyleSheet,Image } from "react-native";
-type Salon = {
-    id:string,
-    name:string,
-    rating:number,
-    location:string,
-    logourl:string
-}
 
 const HomeCustomer =(props: { navigation: { navigate: (arg0: string) => void; }; })=>{
     const [salons,setSalons]= useState([
@@ -36,6 +29,7 @@ const HomeCustomer =(props: { navigation: { navigate: (arg0: string) => void; };
                   </View>
                 </TouchableOpacity> 
         }
+        keyExtractor={item =>item.id.toString()}
         />
         
     )
