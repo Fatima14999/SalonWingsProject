@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, TouchableOpacity, Image, StyleSheet } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 const ProfileCustomer = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
-    const [user1, setUser] = useState(
+    const [user1] = useState(
         {
             name: "Hareem",
             email: "hareemzaid@gmail.com",
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
         elevation: 4,
+        marginLeft:190,
     },
     userName: {
         fontSize: 22,

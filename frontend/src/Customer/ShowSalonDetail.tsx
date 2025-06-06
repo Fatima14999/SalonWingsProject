@@ -69,7 +69,7 @@ const ShowSalonDetail = (props: { navigation: { navigate: (arg0: string) => void
                 <Text style={styles.text}>Timing: {salonData.timingOpen}</Text>
                 <Text style={styles.text}>to {salonData.timingClose}</Text>
             </View>
-            <Text style={[styles.text,{marginBottom:10}]}> {salonData.rating}</Text>
+            <Text style={[styles.text,{marginBottom:10}]}>⭐ {salonData.rating}</Text>
              
             <FlatList 
                 data={Services}

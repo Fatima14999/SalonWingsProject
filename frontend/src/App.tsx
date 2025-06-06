@@ -24,6 +24,8 @@ import AddService from './SalonOwner/AddService';
 import ServiceDetails from './SalonOwner/ServiceDetails';
 import HomeCustomer from './Customer/HomeCustomer';
 import TabNavigationCustomer from './Customer/TabNavigationCustomer'
+import ShowSalonDetail from './Customer/ShowSalonDetail';
+import ServiceDetailShow from './Customer/ServiceDetailShow';
 // import Notifications from './Notifications';
 
 const Tab = createBottomTabNavigator();
@@ -124,6 +126,8 @@ const StackNavigator = () => {
       <Stack.Screen name='ServiceDetails' component={ServiceDetails} options={{headerShown:false}}/>
       <Stack.Screen name='HomeCustomer' component={HomeCustomer}/>
       <Stack.Screen name='TabNavigationCustomer' component={TabNavigationCustomer} options={{headerShown:false}} />
+      <Stack.Screen name='ShowSalonDetail' component={ShowSalonDetail} options={{headerShown:false}}/>
+      <Stack.Screen name='ServiceDetailShow' component={ServiceDetailShow} options={{headerShown:false}}/>
     </Stack.Navigator>
 
   );
