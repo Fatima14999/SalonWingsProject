@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useRoute} from '@react-navigation/native'
 
 type Booking = {
   id: string;
@@ -20,6 +21,8 @@ type Booking = {
 };
 
 const ViewSalonBoonkings = () => {
+  const route = useRoute();
+  const {salonId} = route.params as { salonId: string};
   const [acceptedBookings, setAcceptedBookings] = useState<Booking[]>([
     {
       id: '1',
@@ -40,18 +43,20 @@ const ViewSalonBoonkings = () => {
       avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
     },
   ]);
+   useEffect(() => {
+        fetch('http://10.0.2.2:3000/Salon')
+          .then(res => res.json())
+          
+          .then(data => {
+            setAcceptedBookings(data);
+          })
+          .catch(err => console.log("Error fetching salons:", err));
+          
+      }, []);
 
   const cancelBooking = (id: string) => {
     setAcceptedBookings(prev => prev.filter(booking => booking.id !== id));
   };
-
-  const DetailRow = ({ icon, label }: { icon: string; label: string }) => (
-    <View style={styles.detailRow}>
-      <Icon name={icon} size={18} color="#6e3b6e" />
-      <Text style={styles.detailText}>{label}</Text>
-    </View>
-  );
-
   const renderBooking = ({ item }: { item: Booking }) => (
     <View style={styles.card}>
       <View style={styles.row}>
@@ -62,6 +67,7 @@ const ViewSalonBoonkings = () => {
             <Icon name="person" size={24} color="#6e3b6e" />
           </View>
         )}
+
         <View style={styles.info}>
           <Text style={styles.name}>{item.name}</Text>
           <View style={styles.confirmedBadge}>
@@ -70,16 +76,15 @@ const ViewSalonBoonkings = () => {
           </View>
         </View>
       </View>
-
       <View style={styles.details}>
-        {item.services.map((service, index) => (
-          <DetailRow key={index} icon="cut-outline" label={service} />
-        ))}
-        <DetailRow icon="calendar-outline" label={item.date} />
-        <DetailRow icon="time-outline" label={item.time} />
-        <DetailRow icon="call-outline" label={item.contactNo} />
+        {item.services.map((service, index) =>
+          <View key={index} style={styles.serviceItem}>
+            <Icon name="cut-outline" size={16} color="#000" />
+            <Text style={styles.serviceText}>{service}</Text>
+          </View>
+        )}
+        <Icon name='calendar-outline'>{item.date}</Icon>
       </View>
-
       <TouchableOpacity style={styles.cancelButton} onPress={() => cancelBooking(item.id)}>
         <Text style={styles.cancelButtonText}>Cancel Appointment</Text>
       </TouchableOpacity>
@@ -102,7 +107,10 @@ const ViewSalonBoonkings = () => {
           </View>
         }
       />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f69426 (commit Navigation)
       <TouchableOpacity
         style={[
           styles.deleteButton,
@@ -156,11 +164,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 12,
   },
+  serviceItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  serviceText: {
+    marginLeft: 6,
+    fontSize: 14,
+    color: '#333',
+  },
   info: { flex: 1 },
   name: { fontSize: 18, fontWeight: 'bold', color: '#333' },
   confirmedBadge: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
   confirmedText: { marginLeft: 6, color: '#4CAF50', fontSize: 13, fontWeight: '500' },
-  details: { marginTop: 10 },
+  details: {
+    marginTop: 10,
+    marginLeft: 10,
+  },
   detailRow: { flexDirection: 'row', alignItems: 'center', marginVertical: 6 },
   detailText: { marginLeft: 10, fontSize: 15, color: '#555' },
   cancelButton: { marginTop: 18, alignItems: 'center' },

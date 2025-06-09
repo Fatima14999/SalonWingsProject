@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,68 +10,44 @@ import {
 } from 'react-native';
 
 type Salon = {
-  id: number;
+  _id: string;
   name: string;
   location: string;
   rating: number;
   logoUrl: string;
 };
 
-const mockSalons: Salon[] = [
-  {
-    id: 1,
-    name: 'Brookes Beauty',
-    location: 'Reham Colony',
-    rating: 4.8,
-    logoUrl:
-      'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=100&q=80'
-  },
-  {
-    id: 2,
-    name: 'Style Studio',
-    location: 'Lake View',
-    rating: 4.5,
-    logoUrl:
-      'https://images.unsplash.com/photo-1590080876096-b7b6126e7f95?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 3,
-    name: 'Glow Salon',
-    location: 'Downtown',
-    rating: 4.6,
-    logoUrl:
-      'https://images-platform.99static.com//_OYnMEcNEN4d2iNFdhDkxzcAKq0=/463x104:1557x1198/fit-in/590x590/99designs-contests-attachments/102/102767/attachment_102767932'
-  }
-];
+
 
 const AdminHome = (props: {
   navigation: { navigate: (screen: string) => void };
 }) => {
-  const [salons, setSalons] = useState<Salon[]>(mockSalons);
-
-  const handleImageError = (id: number) => {
-    setSalons((prev) =>
-      prev.map((salon) =>
-        salon.id === id
-          ? {
-              ...salon,
-              logoUrl: 'https://via.placeholder.com/70'
-            }
-          : salon
-      )
-    );
-  };
-
+  const [salons, setSalons] = useState<Salon[]>([]);
+  
+    const [CustomerLocation] = useState({
+      location: "Sun City, Sheikhupura"
+    });
+  
+    useEffect(() => {
+      fetch('http://10.0.2.2:3000/Salon')
+        .then(res => res.json())
+        
+        .then(data => {
+          setSalons(data);
+        })
+        .catch(err => console.log("Error fetching salons:", err));
+        
+    }, []);
   const renderSalon = ({ item }: { item: Salon }) => (
     <TouchableOpacity
-      onPress={() => props.navigation.navigate('Bookings')}
+     onPress={() => props.navigation.navigate('ViewSalonBookings', {salonId: item._id})}
     >
       <View style={styles.card}>
         <Image
           source={{ uri: item.logoUrl }}
           style={styles.image}
           resizeMode="cover"
-          onError={() => handleImageError(item.id)}
+          // onError={() => handleImageError(item._id)}
         />
         <View style={styles.info}>
           <Text style={styles.name}>{item.name}</Text>
@@ -87,7 +63,7 @@ const AdminHome = (props: {
       <Text style={styles.heading}>Registered Salons</Text>
       <FlatList
         data={salons}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) => (item._id  || index).toString()}
         renderItem={renderSalon}
         ListEmptyComponent={<Text>No salons yet.</Text>}
       />

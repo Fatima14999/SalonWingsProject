@@ -6,7 +6,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 type Salon = {
   _id?: string;
-  id?: number;
   name?: string;
   location?: string;
   rating?: number;
@@ -64,7 +63,7 @@ const HomeCustomer = (props: { navigation: { navigate: (arg0: string) => void } 
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={(item, index) => (item._id || item.id || index).toString()}
+          keyExtractor={(item, index) => (item._id  || index).toString()}
           contentContainerStyle={{ paddingBottom: 30 }}
         />
       </View>

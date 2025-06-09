@@ -26,6 +26,11 @@ import HomeCustomer from './Customer/HomeCustomer';
 import TabNavigationCustomer from './Customer/TabNavigationCustomer'
 import ShowSalonDetail from './Customer/ShowSalonDetail';
 import ServiceDetailShow from './Customer/ServiceDetailShow';
+import AdminCurrentPassword from './Admin/AdminCurrentPassword';
+import AdminNewPassword from './Admin/AdminNewPassword';
+import AdminProfileEdit from './Admin/AdminEditProfile';
+import AdminProfile from './Admin/AdminProfile';
+import { RootStackParamList } from './type'
 // import Notifications from './Notifications';
 
 const Tab = createBottomTabNavigator();
@@ -120,7 +125,7 @@ const StackNavigator = () => {
       {/* <Stack.Screen name='Notifications' component={Notifications}/> */}
       <Stack.Screen name='TabBarNavigation' component={TabBarNavigation}options={{headerShown:false}}/>
       <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
-      <Stack.Screen name='Bookings' component={ViewSalonBoonkings} />
+      <Stack.Screen name='ViewSalonBookings' component={ViewSalonBoonkings} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='AddService' component={AddService}/>
       <Stack.Screen name='ServiceDetails' component={ServiceDetails} options={{headerShown:false}}/>
@@ -128,6 +133,10 @@ const StackNavigator = () => {
       <Stack.Screen name='TabNavigationCustomer' component={TabNavigationCustomer} options={{headerShown:false}} />
       <Stack.Screen name='ShowSalonDetail' component={ShowSalonDetail} options={{headerShown:false}}/>
       <Stack.Screen name='ServiceDetailShow' component={ServiceDetailShow} options={{headerShown:false}}/>
+      <Stack.Screen name='AdminCurrentPassword' component={AdminCurrentPassword} options={{headerShown:false}}/>
+      <Stack.Screen name='AdminNewPassword' component={AdminNewPassword} options={{headerShown:false}}/>
+      <Stack.Screen name='AdminProfileEdit' component={AdminProfileEdit} options={{headerShown:false}}/>
+      <Stack.Screen name='AdminProfile' component={AdminProfile} options={{headerShown:false}}/>
     </Stack.Navigator>
 
   );

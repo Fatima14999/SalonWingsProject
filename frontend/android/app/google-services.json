@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "612260962925",
+    "project_id": "salonwings-3803e",
+    "storage_bucket": "salonwings-3803e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612260962925:android:e778ab773bb96a8e245564",
+        "android_client_info": {
+          "package_name": "com.salonwingsproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUayMNdN2XDLz59dwHX9sKo14NfnQ1f68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

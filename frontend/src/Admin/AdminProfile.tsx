@@ -10,17 +10,22 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 const AdminProfile = (props: { navigation: any; route?: any }) => {
   const { navigation, route } = props;
-  const [user, setUser] = useState('Hareem Fatima');
+  const [adminName, setAdminName] = useState<string>();
+  const [adminEmail,setAdminEmail] = useState<string>();
   const [image, setImage] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (route?.params?.currentUser) {
-      setUser(route.params.currentUser);
-    }
-    if (route?.params?.currentImage) {
-      setImage(route.params.currentImage);
-    }
-  }, [route?.params]);
+  useEffect(()=>{
+    fetch('http://10.0.2.2:3000/Admin')
+    .then(res => res.json())
+    .then(data => {
+      setAdminName(data[0].name),
+      setAdminEmail(data[0].email),
+      setImage(data[0].image)
+    })
+    .catch(err =>{
+      console.log("Faild to load admin");
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,26 +35,26 @@ const AdminProfile = (props: { navigation: any; route?: any }) => {
             <Image source={{ uri: image }} style={styles.avatarImage} />
           ) : (
             <View style={styles.avatarPlaceholder}>
-              <Text style={styles.avatarLetter}>{user.charAt(0).toUpperCase()}</Text>
+              {/* <Text style={styles.avatarLetter}>{admin.charAt(0).toUpperCase()}</Text> */}
             </View>
           )}
           <TouchableOpacity
             style={styles.editIcon}
             onPress={() =>
-              navigation.navigate('EditProfile', {
-                currentUser: user,
+              navigation.navigate('AdminProfileEdit', {
+                currentUser: adminName,
                 currentImage: image,
               })
             }>
             <Feather name="edit-3" size={16} color="white" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.userName}>{user}</Text>
-        <Text style={styles.userEmail}>fatimaghulammustafa@gmail.com</Text>
+        <Text style={styles.userName}>{adminName}</Text>
+        <Text style={styles.userEmail}>{adminEmail}</Text>
       </View>
       <View style={styles.listContainer}>
         <TouchableOpacity style={styles.listItem}
-        onPress={()=> props.navigation.navigate('ChangePassword')}>
+        onPress={()=> props.navigation.navigate('AdminCurrentPassword')}>
           <View style={styles.iconCircle}>
             <Feather name="lock" size={20} color="white" />
           </View>
