@@ -1,9 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
+const cors = require('cors')
 const app = express();
 const SalonRoutes = require("./src/routes/Salonroutes")
 const AdminRoutes = require("./src/routes/Admin")
+const BookingRoutes = require("./src/routes/Booking")
+const CustomerRoutes = require("./src/routes/Customer")
+const ServicesRoutes = require("./src/routes/Service")
+const SalonOwnerRoutes = require("./src/routes/SalonOwner")
+app.use(cors());
 const BookingRoutes = require("./src/routes/Booking")
 const CustomerRoutes = require("./src/routes/Customer")
 const ServicesRoutes = require("./src/routes/Service")
@@ -30,6 +36,13 @@ app.use('/Booking',BookingRoutes);
 app.use('/Customer',CustomerRoutes);
 app.use('/Services',ServicesRoutes);
 app.use('/SalonOwner',SalonOwnerRoutes);
+app.use('/Admin/',AdminRoutes);
+app.use('/Booking',BookingRoutes);
+app.use('/Customer',CustomerRoutes);
+app.use('/Services',ServicesRoutes);
+app.use('/SalonOwner',SalonOwnerRoutes);
+
+// ✅ Optional: Route to add a salon (for testing)
 // app.post('/Salon', async (req, res) => {
 //     try {
 //         const newSalon = new Salon(req.body);

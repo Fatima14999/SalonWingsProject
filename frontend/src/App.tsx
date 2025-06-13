@@ -30,11 +30,12 @@ import AdminCurrentPassword from './Admin/AdminCurrentPassword';
 import AdminNewPassword from './Admin/AdminNewPassword';
 import AdminProfileEdit from './Admin/AdminEditProfile';
 import AdminProfile from './Admin/AdminProfile';
-import { RootStackParamList } from './type'
+import { RootStackParamList } from './type';
+import ViewRegistrationRequest from './Admin/ViewRegistrationRequest';
 // import Notifications from './Notifications';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
@@ -125,7 +126,7 @@ const StackNavigator = () => {
       {/* <Stack.Screen name='Notifications' component={Notifications}/> */}
       <Stack.Screen name='TabBarNavigation' component={TabBarNavigation}options={{headerShown:false}}/>
       <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
-      <Stack.Screen name='ViewSalonBookings' component={ViewSalonBoonkings} />
+      <Stack.Screen name='ViewSalonBookings' component={ViewSalonBoonkings} options={{headerTitle:'Salon Bookings'}}/>
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='AddService' component={AddService}/>
       <Stack.Screen name='ServiceDetails' component={ServiceDetails} options={{headerShown:false}}/>
@@ -137,6 +138,7 @@ const StackNavigator = () => {
       <Stack.Screen name='AdminNewPassword' component={AdminNewPassword} options={{headerShown:false}}/>
       <Stack.Screen name='AdminProfileEdit' component={AdminProfileEdit} options={{headerShown:false}}/>
       <Stack.Screen name='AdminProfile' component={AdminProfile} options={{headerShown:false}}/>
+      <Stack.Screen name='ViewRegistrationRequest' component={ViewRegistrationRequest}/>
     </Stack.Navigator>
 
   );

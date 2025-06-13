@@ -15,7 +15,7 @@ const AdminProfile = (props: { navigation: any; route?: any }) => {
   const [image, setImage] = useState<string | null>(null);
 
   useEffect(()=>{
-    fetch('http://10.0.2.2:3000/Admin')
+    fetch('http://10.0.2.2:3000/Admin/')
     .then(res => res.json())
     .then(data => {
       setAdminName(data[0].name),

@@ -8,6 +8,11 @@ import {
   StyleSheet,
   Alert
 } from 'react-native';
+import { RootStackParamList } from '../type';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+type AdminHomeProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'AdminHome'>;
+};
 
 type Salon = {
   _id: string;
@@ -19,15 +24,8 @@ type Salon = {
 
 
 
-const AdminHome = (props: {
-  navigation: { navigate: (screen: string) => void };
-}) => {
+const AdminHome = ({ navigation }: AdminHomeProps) => {
   const [salons, setSalons] = useState<Salon[]>([]);
-  
-    const [CustomerLocation] = useState({
-      location: "Sun City, Sheikhupura"
-    });
-  
     useEffect(() => {
       fetch('http://10.0.2.2:3000/Salon')
         .then(res => res.json())
@@ -40,7 +38,7 @@ const AdminHome = (props: {
     }, []);
   const renderSalon = ({ item }: { item: Salon }) => (
     <TouchableOpacity
-     onPress={() => props.navigation.navigate('ViewSalonBookings', {salonId: item._id})}
+     onPress={() => navigation.navigate('ViewSalonBookings', {salonId: item._id})}
     >
       <View style={styles.card}>
         <Image
