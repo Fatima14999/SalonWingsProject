@@ -26,6 +26,17 @@ type Salon = {
 const ViewRegistrationRequest = () => {
   const route = useRoute<ViewSalonBookingsRouteProp>();
   const { salonId } = route.params as { salonId: string };
+  // const [acceptedBookings, setAcceptedBookings] = useState<Salon[]>([]);
+  // const salonData = {
+  //   ownerName: 'Ali Raza',
+  //   salonName: 'Luxury Cuts & Beauty',
+  //   contactNo: '0301-2345678',
+  //   cnicNo: '35202-1234567-1',
+  //   location: 'Gulberg, Lahore',
+  //   cnicImage: 'https://via.placeholder.com/300x180.png?text=CNIC+Image',
+  //   salonImage: 'https://via.placeholder.com/300x180.png?text=Salon+Image',
+  //   personImage: 'https://via.placeholder.com/150.png?text=Owner',
+  // };
   const [salonData,setSalonData] = useState<Salon>();
   useEffect(() => {
   fetch(`http://10.0.2.2:3000/Salon/${salonId}`)
@@ -43,7 +54,6 @@ const ViewRegistrationRequest = () => {
 
     return (
   <ScrollView contentContainerStyle={styles.container}>
-    <Text>{salonId}</Text>
     {/* {!salonData ? (
       <Text>Loading...</Text>
     ) : ( */}
@@ -76,12 +86,12 @@ const ViewRegistrationRequest = () => {
         </View>
 
         <Text style={styles.sectionTitle}>Salon Image</Text>
-        {salonData?.salonImage.map((img, index) => (
+        {salonData?.salonImage?.map((img, index) => (
           <Image key={index} source={{ uri: img }} style={styles.fullImage} />
         ))}
 
         <Text style={styles.sectionTitle}>CNIC Image</Text>
-        {salonData?.salonOwnerId.cnicImage.map((img, index) => (
+        {salonData?.salonOwnerId?.cnicImage.map((img, index) => (
           <Image key={index} source={{ uri: img }} style={styles.fullImage} />
         ))}
       </View>

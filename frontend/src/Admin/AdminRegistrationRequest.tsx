@@ -54,7 +54,7 @@ const AdminRegistrationRequest = ({ navigation }: AdminHomeProps) => {
 
   return (
     <View style={{ flex: 1, padding: 16, backgroundColor: '#f5f5f5' }}>
-      <Text style={styles.heading}>Registered Salons</Text>
+      <Text style={styles.heading}>Registration Request</Text>
       <FlatList
         data={salonOwner}
         keyExtractor={(item, index) => (item._id || index).toString()}
