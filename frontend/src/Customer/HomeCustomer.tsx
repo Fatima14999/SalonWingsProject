@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput } 
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Fuse from "fuse.js";
 
 type Salon = {
   _id?: string;
@@ -14,43 +15,56 @@ type Salon = {
 
 const HomeCustomer = (props: { navigation: { navigate: (arg0: string) => void } }) => {
   const [salons, setSalons] = useState<Salon[]>([]);
+  const [searchText, setSearchText] = useState('');
 
   const [CustomerLocation] = useState({
     location: "Sun City, Sheikhupura"
   });
-
   useEffect(() => {
     fetch('http://10.0.2.2:3000/Salon')
       .then(res => res.json())
-      
+
       .then(data => {
         setSalons(data);
       })
       .catch(err => console.log("Error fetching salons:", err));
-      
+
   }, []);
+  const fuse = new Fuse(salons, {
+    keys: ['name'],
+    threshold: 0.4,
+  })
+  const filteredSalons = searchText
+    ? fuse.search(searchText).map(result => result.item)
+    : salons;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.LocationIcon}>
-          <Ionicons name='location' style={{ fontSize: 19, color: '#fff' }} />
-          <Text style={styles.locationText}>{CustomerLocation.location}</Text>
+        <View style={styles.header1}>
+          <View style={styles.LocationIcon}>
+            <Ionicons name='location' style={{ fontSize: 19, color: '#fff' }} />
+            <Text style={styles.locationText}>{CustomerLocation.location}</Text>
+          </View>
+          <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
+            <Ionicons name="cart" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
-
         <View style={styles.search}>
           <FontAwesome5 name="search" style={styles.searchIcon} />
           <TextInput
             style={styles.searchText}
             placeholder="Search Salons"
             placeholderTextColor="#999"
+            value={searchText}
+            onChangeText={setSearchText}
           />
         </View>
       </View>
 
       <View style={styles.listSection}>
         <FlatList
-          data={salons}
+          data={filteredSalons}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => props.navigation.navigate('ShowSalonDetail')}>
               <View style={styles.card}>
@@ -63,7 +77,7 @@ const HomeCustomer = (props: { navigation: { navigate: (arg0: string) => void } 
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={(item, index) => (item._id  || index).toString()}
+          keyExtractor={(item, index) => (item._id || index).toString()}
           contentContainerStyle={{ paddingBottom: 30 }}
         />
       </View>
@@ -77,11 +91,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#3D726D',
+
   },
   header: {
     paddingHorizontal: 16,
     paddingTop: 20,
     paddingBottom: 10,
+
+  },
+  header1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   LocationIcon: {
     flexDirection: 'row',
