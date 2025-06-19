@@ -113,10 +113,6 @@ const ViewSalonBoonkings = () => {
           </View>
         }
       />
-<<<<<<< HEAD
-
-=======
->>>>>>> 4f69426 (commit Navigation)
       <TouchableOpacity
         style={[
           styles.deleteButton,
